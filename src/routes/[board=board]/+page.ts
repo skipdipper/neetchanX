@@ -1,10 +1,24 @@
 import type { PageLoad } from './$types';
+import { error } from '@sveltejs/kit';
 
-export const load = (async ({ params }) => {
+export const load = (async ({ fetch, params }) => {
 	async function getCatalog() {
-		const response = await fetch('http://127.0.0.1:5173/a/api');
-		const catalog = await response.json();
-		return catalog;
+		const response = await fetch(`/${params.board}/api`);
+
+		if (!response.ok) {
+			throw error(404, {
+				message: 'Not found'
+			});
+		}
+
+		try {
+			const catalog = await response.json();
+			return catalog;
+		} catch (e) {
+			throw error(404, {
+				message: 'Unexpected JSON token'
+			});
+		}
 	}
 
 	const catalog = await getCatalog();

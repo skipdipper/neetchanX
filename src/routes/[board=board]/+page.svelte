@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import ThreadGridItem from '../../components/Catalog/ThreadGridItem.svelte';
+	import ThreadGridItem from '$lib/components/Catalog/ThreadGridItem.svelte';
 	export let data: PageData;
 </script>
 
