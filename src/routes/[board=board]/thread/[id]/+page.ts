@@ -2,8 +2,8 @@ import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
 export const load = (async ({ fetch, params }) => {
-	async function getCatalog() {
-		const response = await fetch(`/${params.board}`);
+	async function getThread() {
+		const response = await fetch(`/${params.board}/thread/${params.id}`);
 
 		if (!response.ok) {
 			throw error(404, {
@@ -12,8 +12,8 @@ export const load = (async ({ fetch, params }) => {
 		}
 
 		try {
-			const catalog = await response.json();
-			return catalog;
+			const thread = await response.json();
+			return thread;
 		} catch (e) {
 			throw error(404, {
 				message: 'Unexpected JSON token'
@@ -21,6 +21,6 @@ export const load = (async ({ fetch, params }) => {
 		}
 	}
 
-	const catalog = await getCatalog();
-	return { catalog };
+	const thread = await getThread();
+	return { thread };
 }) satisfies PageLoad;

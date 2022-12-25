@@ -7,6 +7,7 @@
 <div id="threads">
 	{#each data.catalog[0].threads as post}
 		<ThreadGridItem
+			threadId={post.no}
 			subject={post.sub}
 			comment={post.com}
 			replies={post.replies}
