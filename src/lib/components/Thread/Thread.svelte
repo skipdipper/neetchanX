@@ -16,6 +16,8 @@
 			ext={post.ext}
 			height={post.h}
 			width={post.w}
+			thumbnailHeight={post.tn_h}
+			thumbnailWidth={post.tn_w}
 		/>
 	{/each}
 </div>

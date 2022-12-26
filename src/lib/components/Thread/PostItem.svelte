@@ -9,6 +9,8 @@
 	export let ext: string | undefined;
 	export let height: number | undefined;
 	export let width: number | undefined;
+	export let thumbnailHeight: number | undefined;
+	export let thumbnailWidth: number | undefined;
 
 	const thumbnailUrl = `https://i.4cdn.org/g/${tim}s.jpg`;
 	const fileUrl = `https://i.4cdn.org/g/${tim}${ext}`;
@@ -16,6 +18,12 @@
 		hourCycle: 'h23'
 	});
 	const link = `p${postId}`;
+
+	let isExpanded = false;
+	$: display = isExpanded ? 'none' : null;
+	function toggleExpand() {
+		isExpanded = !isExpanded;
+	}
 </script>
 
 <div class="post" id={link}>
@@ -30,14 +38,34 @@
 			{postId}
 		</span>
 	</div>
-	<div class="post-content">
+	<div class="post-content" class:image-expanded={isExpanded}>
 		{#if tim}
 			<div class="file-info">
 				<a href={fileUrl} referrerpolicy="no-referrer">{filename}{ext}</a>
 				({width}x{height})
 			</div>
-			<div class="thumbnail">
-				<img src={thumbnailUrl} alt="" loading="lazy" referrerpolicy="no-referrer" />
+			<div class="thumbnail" on:click={toggleExpand} on:keydown={toggleExpand}>
+				<a href={fileUrl} target="_blank" rel="noreferrer" on:click|preventDefault>
+					<img
+						src={thumbnailUrl}
+						alt=""
+						loading="lazy"
+						referrerpolicy="no-referrer"
+						style:display
+						width={thumbnailWidth}
+						height={thumbnailHeight}
+					/>
+					{#if isExpanded}
+						<img
+							src={fileUrl}
+							alt=""
+							loading="lazy"
+							referrerpolicy="no-referrer"
+							{width}
+							{height}
+						/>
+					{/if}
+				</a>
 			</div>
 		{/if}
 
@@ -73,5 +101,8 @@
 	.thumbnail {
 		float: left;
 		margin-right: 10px;
+	}
+	.image-expanded .post-comment {
+		clear: left;
 	}
 </style>
