@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let postId: number;
 	export let poster: string;
+	export let subject: string | undefined;
 	export let comment: string | undefined;
 	export let time: number;
 	export let tim: number | undefined;
@@ -19,6 +20,9 @@
 
 <div class="post" id={link}>
 	<div class="post-info">
+		{#if subject}
+			<span class="post-subject">{subject}</span>
+		{/if}
 		<span class="poster">{poster}</span>
 		<span class="post-date">{localeTime}</span>
 		<span class="post-id">
@@ -47,6 +51,14 @@
 	.post {
 		border: 1px solid;
 		margin: 4px 0;
+		padding: 4px;
+	}
+	.post-subject {
+		color: #b294bb;
+		font-weight: 700;
+	}
+	.poster {
+		font-weight: 700;
 	}
 	.post-id a {
 		color: inherit;

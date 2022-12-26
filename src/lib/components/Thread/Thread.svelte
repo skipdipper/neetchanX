@@ -8,6 +8,7 @@
 		<PostItem
 			postId={post.no}
 			poster={post.name}
+			subject={post.sub}
 			comment={post.com}
 			time={post.time}
 			tim={post.tim}
