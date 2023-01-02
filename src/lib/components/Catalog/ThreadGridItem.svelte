@@ -7,6 +7,8 @@
 	export let replies: number;
 	export let images: number;
 	export let tim: number;
+	export let thumbnailHeight: number | undefined;
+	export let thumbnailWidth: number | undefined;
 
 	let { board } = $page.params;
 	const src = `https://i.4cdn.org/g/${tim}s.jpg`;
@@ -16,7 +18,14 @@
 <div class="thread" data-sveltekit-preload-data="off">
 	<div class="thumbnail">
 		<a href={link}>
-			<img {src} alt="" loading="lazy" referrerpolicy="no-referrer" />
+			<img
+				{src}
+				alt=""
+				loading="lazy"
+				referrerpolicy="no-referrer"
+				width={thumbnailWidth}
+				height={thumbnailHeight}
+			/>
 		</a>
 	</div>
 	<div class="thread-meta">

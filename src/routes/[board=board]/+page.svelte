@@ -13,6 +13,8 @@
 			replies={post.replies}
 			images={post.images}
 			tim={post.tim}
+			thumbnailHeight={post.tn_h}
+			thumbnailWidth={post.tn_w}
 		/>
 	{/each}
 </div>

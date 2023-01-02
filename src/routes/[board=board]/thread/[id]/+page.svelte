@@ -5,4 +5,7 @@
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<meta name="referrer" content="no-referrer" />
+</svelte:head>
 <Thread posts={data.thread.posts} />

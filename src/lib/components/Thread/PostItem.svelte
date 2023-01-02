@@ -43,6 +43,12 @@
 			<div class="file-info">
 				<a href={fileUrl} referrerpolicy="no-referrer">{filename}{ext}</a>
 				({width}x{height})
+
+				{#if isExpanded && ext === '.webm'}
+					<span class="collapse-webm">
+						<a href="#" on:click|preventDefault={toggleExpand}>[Close]</a>
+					</span>
+				{/if}
 			</div>
 			<div class="thumbnail" on:click={toggleExpand} on:keydown={toggleExpand}>
 				<a href={fileUrl} target="_blank" rel="noreferrer" on:click|preventDefault>
@@ -56,14 +62,21 @@
 						height={thumbnailHeight}
 					/>
 					{#if isExpanded}
-						<img
-							src={fileUrl}
-							alt=""
-							loading="lazy"
-							referrerpolicy="no-referrer"
-							{width}
-							{height}
-						/>
+						{#if ext === '.webm'}
+							<video autoplay controls loop {width} {height}>
+								<source src={fileUrl} type="video/webm" />
+								Your browser does not support embedded video playback
+							</video>
+						{:else}
+							<img
+								src={fileUrl}
+								alt=""
+								loading="lazy"
+								referrerpolicy="no-referrer"
+								{width}
+								{height}
+							/>
+						{/if}
 					{/if}
 				</a>
 			</div>
